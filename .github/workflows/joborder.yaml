@@ -1,0 +1,60 @@
+name: joborder
+
+on: push
+
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    needs: [job2]
+    outputs:
+      succ_flag: ${{ steps.flagstep.outputs.flag }}
+    steps:
+      - run: echo "job1"
+      - name: check flag
+        env:
+          FLAG: ${{ needs.job2.outputs.succ_flag }}
+        run: |
+          if [ $FLAG == "1" ]
+          then
+            exit 0
+          else
+            exit 1
+          fi                 
+      - name: set flag
+        id: flagstep
+        run: echo "flag=1" >> "$GITHUB_OUTPUT"
+
+  job2:
+    runs-on: ubuntu-latest
+    needs: [job3]
+    outputs:
+      succ_flag: ${{ steps.flagstep.outputs.flag }}
+    steps:
+      - run: echo "job2"
+      - name: check flag
+        env:
+          FLAG: ${{ needs.job3.outputs.succ_flag }}
+        run: |
+          if [ $FLAG == "1" ]
+          then
+            exit 0
+          else
+            exit 1
+          fi                 
+      - name: set flag
+        id: flagstep
+        run: echo "flag=1" >> "$GITHUB_OUTPUT"
+      
+
+  job3:
+    runs-on: ubuntu-latest
+    needs: []
+    outputs:
+      succ_flag: ${{ steps.flagstep.outputs.flag }}
+    steps:
+      - run: echo "job3"
+      - name: set flag
+        id: flagstep
+        run: echo "flag=1" >> "$GITHUB_OUTPUT"
+
+
