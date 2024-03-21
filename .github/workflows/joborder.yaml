@@ -14,8 +14,7 @@ jobs:
         env:
           JOB2_FLAG: ${{ needs.job2.outputs.succ_flag }}
         run: |
-          if [ $JOB2_FLAG == "1" ]
-          then
+          if [ $JOB2_FLAG == "1" ]; then
             exit 0
           else
             exit 1
@@ -35,8 +34,7 @@ jobs:
         env:
           JOB3_FLAG: ${{ needs.job3.outputs.succ_flag }}
         run: |
-          if [ $JOB3_FLAG == "1" ]
-          then
+          if [ $JOB3_FLAG == "1" ]; then
             exit 0
           else
             exit 1
@@ -69,8 +67,7 @@ jobs:
           JOB2_FLAG: ${{ needs.job2.outputs.succ_flag }}
           JOB3_FLAG: ${{ needs.job3.outputs.succ_flag }}
         run: |
-          if [ $JOB2_FLAG == "1" && $JOB3_FLAG == "1" ]
-          then
+          if [ $JOB2_FLAG == "1" ] && [ $JOB3_FLAG == "1" ]; then
             exit 0
           else
             exit 1
@@ -91,8 +88,7 @@ jobs:
           JOB2_FLAG: ${{ needs.job2.outputs.succ_flag }}
           JOB4_FLAG: ${{ needs.job4.outputs.succ_flag }}
         run: |
-          if [ $JOB2_FLAG == "1" && $JOB4_FLAG == "1" ]
-          then
+          if [ $JOB2_FLAG == "1" ] && [ $JOB4_FLAG == "1" ]; then
             exit 0
           else
             exit 1
@@ -115,8 +111,7 @@ jobs:
           JOB4_FLAG: ${{ needs.job4.outputs.succ_flag }}
           JOB5_FLAG: ${{ needs.job5.outputs.succ_flag }}
         run: |
-          if [ $JOB1_FLAG == "1" && $JOB2_FLAG == "1" && $JOB4_FLAG == "1" && $JOB5_FLAG == "1" ]
-          then
+          if [ $JOB1_FLAG == "1" ] && [ $JOB2_FLAG == "1" ] && [ $JOB4_FLAG == "1" ] && [ $JOB5_FLAG == "1" ]; then
             exit 0
           else
             exit 1
